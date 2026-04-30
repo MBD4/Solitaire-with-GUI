@@ -1,0 +1,33 @@
+solitaire-project/
+│
+├── c-backend/                   <-- Your existing C project
+│   ├── Makefile
+│   ├── main.c                   <-- Refactored to act as a TCP Server
+│   ├── commands/
+│   └── utils/
+│
+└── spring-frontend/             <-- Your Maven Spring Boot project
+    ├── pom.xml                  <-- Includes Web and WebSocket dependencies
+    └── src/
+        └── main/
+            ├── java/com/solitaire/
+            │   ├── SolitaireApplication.java
+            │   │
+            │   ├── controller/
+            │   │   └── GameController.java     <-- Receives web requests from the browser
+            │   │
+            │   ├── service/
+            │   │   └── TcpClientService.java   <-- Manages the TCP connection to the C backend
+            │   │
+            │   └── dto/
+            │       ├── MoveRequest.java        <-- Java Object representing incoming JSON moves
+            │       └── BoardState.java         <-- Java Object representing outgoing JSON board state
+            │
+            └── resources/
+                ├── application.properties      <-- Configure ports here (e.g., server.port=8080)
+                ├── templates/
+                │   └── index.html              <-- Thymeleaf template (your main GUI layout)
+                └── static/
+                    ├── css/style.css           <-- Styling for your cards and grid
+                    ├── js/app.js               <-- Frontend logic (drag & drop, sending moves to Java)
+                    └── images/                 <-- Your card images (e.g., AC.png, 5H.png)
