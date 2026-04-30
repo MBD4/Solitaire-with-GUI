@@ -6,3 +6,5 @@
 
 # Build artifacts and archives
 *.zip
+
+layout.txt
