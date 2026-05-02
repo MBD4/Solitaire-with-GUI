@@ -31,3 +31,7 @@ solitaire-project/
                     ├── css/style.css           <-- Styling for your cards and grid
                     ├── js/app.js               <-- Frontend logic (drag & drop, sending moves to Java)
                     └── images/                 <-- Your card images (e.g., AC.png, 5H.png)
+
+
+C backend, it will be sent in json format
+Java frontend, will only send command along with, if we are in the play phase, which card is being moved to where
