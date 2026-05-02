@@ -22,6 +22,8 @@ public class GameBoard {
     // A field to hold the game status (e.g., "OK" or "ERROR")
     private String status;
 
+    private String phase;
+
     public List<Card> getC1() {
         return c1;
     }
@@ -116,5 +118,13 @@ public class GameBoard {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getPhase() {
+        return phase;
+    }
+
+    public void setPhase(String phase) {
+        this.phase = phase;
     }
 }
