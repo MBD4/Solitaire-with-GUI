@@ -60,7 +60,7 @@
             <p class="fs-5">
                 Status: <span class="badge bg-primary" th:text="${gameBoard.status != null ? gameBoard.status : 'DISCONNECTED'}"></span>
                 <span class="mx-2">|</span>
-                Phase: <span class="badge bg-secondary" th:text="${gameBoard.phase != null ? gameBoard.phase : 'UNKNOWN'}"></span>
+                Phase: <span class="badge bg-secondary" th:text="${gameBoard.phase != null ? (gameBoard.phase == '0' ? 'startup' : 'play') : 'UNKNOWN'}"></span>
             </p>
         </div>
         <div class="col-md-5">
