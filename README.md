@@ -1,7 +1,8 @@
 We chose to build our frontend GUI with Spring Boot, as we have prior experience using it from the course 02324 Advanced Programming. 
 The TCP socket communication is implemented in the TcpClientService, which is called by the GameController. 
 The controller receives the response from the C backend, parses it, and passes it on to our HTML page. 
-We use Thymeleaf to dynamically render the game board based on this data.
+We use Thymeleaf to dynamically render the game board based on this data. We also use Bootstrap with our HTML page, to make it
+easier for ourselves to design it without having to write too much CSS ourselves.
 
 To make it possible to click a card and drop it without needing to type backend C commands, the HTML page is structured entirely as a form. 
 Every playable card acts as a radio button, and the drop zones at the bottom of each pile act as submit buttons. 
