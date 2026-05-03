@@ -51,6 +51,28 @@ public class GameController {
         return "index";
     }
 
+    @PostMapping("/move")
+    public String executeMove(
+            @RequestParam(value = "source", required = false) String source,
+            @RequestParam(value = "destination", required = false) String destination,
+            Model model) {
+
+        // Only send the command if the user actually picked a card AND a destination
+        if (source != null && destination != null) {
+            String command = source + "->" + destination;
+            String rawResponse = tcpClientService.sendCommand(command);
+            GameBoard board = parseToDto(rawResponse);
+            model.addAttribute("gameBoard", board);
+        } else {
+            // If they clicked a destination without selecting a card first, just reload the board
+            String rawResponse = tcpClientService.sendCommand("SW");
+            GameBoard board = parseToDto(rawResponse);
+            model.addAttribute("gameBoard", board);
+        }
+
+        return "index";
+    }
+
     // --- HELPER METHOD TO TRANSLATE C STRING TO JAVA OBJECT ---
     private GameBoard parseToDto(String rawResponse) {
         GameBoard board = new GameBoard();
