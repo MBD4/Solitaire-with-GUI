@@ -81,7 +81,6 @@ public class GameController {
         }
 
         try {
-            // Splits format: "OK|PLAY|C1=AS1,2H0;C2=..."
             // We use "\\|" because pipe is a special regex character in Java
             String[] parts = rawResponse.split("\\|");
 
@@ -98,24 +97,23 @@ public class GameController {
             // Game Data
             if (parts.length >= 3) {
                 String gameData = parts[2];
-                String[] columns = gameData.split(";"); // Splits into ["C1=AS1,2H0", "C2=..."]
+                String[] columns = gameData.split(";");
 
                 for (String colData : columns) {
                     if (colData.trim().isEmpty()) continue;
 
-                    String[] keyValuePair = colData.split("="); // ["C1", "AS1,2H0"]
+                    String[] keyValuePair = colData.split("=");
                     String key = keyValuePair[0].trim();
 
                     List<Card> cardList = new ArrayList<>();
 
                     // Check if there are actually cards after the "="
                     if (keyValuePair.length > 1 && !keyValuePair[1].trim().isEmpty()) {
-                        String[] cards = keyValuePair[1].split(","); // ["AS1", "2H0"]
+                        String[] cards = keyValuePair[1].split(",");
 
                         for (String cardStr : cards) {
                             cardStr = cardStr.trim();
 
-                            // Ignore empty strings caused by trailing commas (e.g., "card1,card2,")
                             if (cardStr.length() >= 3) {
                                 String rank = String.valueOf(cardStr.charAt(0));
                                 String suit = String.valueOf(cardStr.charAt(1));
