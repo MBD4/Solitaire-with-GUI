@@ -21,10 +21,9 @@ public class GameController {
         this.tcpClientService = tcpClientService;
     }
 
-    // Initial Page Load
     @GetMapping("/")
     public String loadGame(Model model) {
-        // Send a command to get the initial board state (assuming "SW" is Show)
+        // Send a command to get the initial board state
         String rawResponse = tcpClientService.sendCommand("SW");
 
         // Parse the C servers string into our Java object
@@ -36,10 +35,9 @@ public class GameController {
         return "index";
     }
 
-    // Handle Game Commands
     @PostMapping("/command")
     public String executeCommand(@RequestParam("command") String command, Model model) {
-        // Send the user's move (e.g., "C1:7H->C2") to the C backend
+        // Send the user's move to the C backend
         String rawResponse = tcpClientService.sendCommand(command);
 
         // Parse the new resulting state
@@ -57,7 +55,7 @@ public class GameController {
             @RequestParam(value = "destination", required = false) String destination,
             Model model) {
 
-        // Only send the command if the user actually picked a card AND a destination
+        // Only send the command if the user actually picked a card and a destination
         if (source != null && destination != null) {
             String command = source + "->" + destination;
             String rawResponse = tcpClientService.sendCommand(command);
@@ -73,7 +71,7 @@ public class GameController {
         return "index";
     }
 
-    // --- HELPER METHOD TO TRANSLATE C STRING TO JAVA OBJECT ---
+    // helper method to translate c string to java object
     private GameBoard parseToDto(String rawResponse) {
         GameBoard board = new GameBoard();
 
@@ -87,17 +85,17 @@ public class GameController {
             // We use "\\|" because pipe is a special regex character in Java
             String[] parts = rawResponse.split("\\|");
 
-            // 1. Status
+            // Status
             if (parts.length >= 1) {
                 board.setStatus(parts[0].trim());
             }
 
-            // 2. Phase
+            // Phase
             if (parts.length >= 2) {
                 board.setPhase(parts[1].trim());
             }
 
-            // 3. Game Data
+            // Game Data
             if (parts.length >= 3) {
                 String gameData = parts[2];
                 String[] columns = gameData.split(";"); // Splits into ["C1=AS1,2H0", "C2=..."]
@@ -115,7 +113,7 @@ public class GameController {
                         String[] cards = keyValuePair[1].split(","); // ["AS1", "2H0"]
 
                         for (String cardStr : cards) {
-                            cardStr = cardStr.trim(); // Cleans up " card3" to "card3"
+                            cardStr = cardStr.trim();
 
                             // Ignore empty strings caused by trailing commas (e.g., "card1,card2,")
                             if (cardStr.length() >= 3) {

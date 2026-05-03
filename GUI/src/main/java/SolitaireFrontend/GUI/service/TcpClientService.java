@@ -33,11 +33,9 @@ public class TcpClientService {
             System.out.println("Successfully connected to C backend at " + host + ":" + port);
         } catch (Exception e) {
             System.err.println("Failed to connect to C backend: " + e.getMessage());
-            // You might want to implement a retry mechanism here for production
         }
     }
 
-    // Method to send commands (e.g., "P", "LD", or a move "C1:7H->C2")
     public String sendCommand(String command) {
         // Ensure we are connected before trying to send
         if (socket == null || socket.isClosed()) {
@@ -48,7 +46,7 @@ public class TcpClientService {
             // Send the command to the C server
             out.println(command);
 
-            // Read and return the response (which will be your JSON string)
+            // Read and return the response
             return in.readLine();
         } catch (Exception e) {
             System.err.println("Error sending command: " + e.getMessage());
@@ -56,7 +54,7 @@ public class TcpClientService {
         }
     }
 
-    // Cleanly close the socket when the Spring application shuts down
+    // close the socket when the Spring application shuts down
     @PreDestroy
     public void disconnect() {
         try {
