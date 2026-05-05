@@ -93,7 +93,7 @@
 
                     <!-- Populated Foundation (Top Card acts as a Radio Button) -->
                     <div th:if="${!foundationList.empty}" th:with="topCard=${foundationList[foundationList.size() - 1]}">
-                        <input type="radio" name="source" th:value="'F' + ${stat.count} + ':' + ${topCard.rank} + ${topCard.suit}" th:id="'F' + ${stat.count} + '-top'" class="hidden-radio">
+                        <input type="radio" name="source" th:value="'F' + ${stat.count}" th:id="'F' + ${stat.count} + '-top'" class="hidden-radio">
                         <label th:for="'F' + ${stat.count} + '-top'" style="cursor: pointer;">
                             <div class="card-dim rounded bg-white shadow d-flex align-items-center justify-content-center border" th:classappend="${topCard.suit == 'H' or topCard.suit == 'D'} ? 'text-danger' : 'text-dark'">
                                 <span class="fs-3 fw-bold" th:text="${topCard.rank} + ${topCard.suit}"></span>
