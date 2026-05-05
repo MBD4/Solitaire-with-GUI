@@ -19,7 +19,7 @@ public class GameBoard {
     private List<Card> f3 = new ArrayList<>();
     private List<Card> f4 = new ArrayList<>();
 
-    // A field to hold the game status (e.g., "OK" or "ERROR")
+    // A field to hold the game status
     private String status;
 
     private String phase;
