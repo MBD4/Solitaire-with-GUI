@@ -73,6 +73,15 @@
                             <button class="btn btn-warning fw-bold" type="submit">Execute</button>
                         </div>
                     </form>
+                    <!-- QUICK ACTIONS BUTTONS -->
+                    <form action="/command" method="POST" class="mt-3">
+                        <div class="d-flex flex-wrap gap-2 align-items-center">
+                            <button type="submit" name="command" value="SR" class="btn btn-sm btn-outline-info">Shuffle (SR)</button>
+                            <button type="submit" name="command" value="P" class="btn btn-sm btn-success fw-bold">Play (P)</button>
+                            <button type="submit" name="command" value="Q" class="btn btn-sm btn-warning text-dark fw-bold">Q</button>
+                            <button type="submit" name="command" value="QQ" class="btn btn-sm btn-danger text-dark fw-bold">QQ</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
