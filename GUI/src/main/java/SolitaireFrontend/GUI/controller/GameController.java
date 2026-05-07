@@ -39,6 +39,7 @@ public class GameController {
     public String executeCommand(@RequestParam("command") String command, Model model) {
         // Send the user's move to the C backend
         String rawResponse = tcpClientService.sendCommand(command);
+        System.out.println(rawResponse);
 
         // Parse the new resulting state
         GameBoard board = parseToDto(rawResponse);
@@ -144,7 +145,7 @@ public class GameController {
                 // Deal the 52 cards into the 7 columns left-to-right
                 for (int i = 0; i < cards.size(); i++) {
                     Card c = cards.get(i);
-//                    c.setVisible(true);
+                    c.setVisible(true);
                     int colIndex = i % 7;
                     switch (colIndex) {
                         case 0: board.getC1().add(c); break;
