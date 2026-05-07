@@ -144,7 +144,7 @@ public class GameController {
                 // Deal the 52 cards into the 7 columns left-to-right
                 for (int i = 0; i < cards.size(); i++) {
                     Card c = cards.get(i);
-                    c.setVisible(true);
+//                    c.setVisible(true);
                     int colIndex = i % 7;
                     switch (colIndex) {
                         case 0: board.getC1().add(c); break;
