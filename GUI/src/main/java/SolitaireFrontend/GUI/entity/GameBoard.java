@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameBoard {
+    // the whole deck for the startup phase:
+    private List<Card> deck = new ArrayList<>();
+
     // The 7 playing columns
     private List<Card> c1 = new ArrayList<>();
     private List<Card> c2 = new ArrayList<>();
@@ -23,6 +26,14 @@ public class GameBoard {
     private String status;
 
     private String phase;
+
+    public List<Card> getDeck() {
+        return deck;
+    }
+
+    public void setDeck(List<Card> deck) {
+        this.deck = deck;
+    }
 
     public List<Card> getC1() {
         return c1;

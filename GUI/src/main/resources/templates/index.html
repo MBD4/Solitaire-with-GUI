@@ -90,17 +90,14 @@
     <!-- GAME BOARD (Wrapped in a form for pure HTML submission) -->
     <form th:if="${gameBoard.status != null}" action="/move" method="POST">
 
-        <!-- TOP ROW: Foundations -->
-        <div class="d-flex justify-content-end gap-3 mb-5" style="min-height: 190px;">
+        <div th:if="${gameBoard.phase != '0'}" class="d-flex justify-content-end gap-3 mb-5" style="min-height: 190px;">
             <div th:each="foundationList, stat : ${ {gameBoard.f1, gameBoard.f2, gameBoard.f3, gameBoard.f4} }" class="d-flex flex-column align-items-center">
 
                 <div class="card-dim position-relative mb-2">
-                    <!-- Empty Foundation -->
                     <div th:if="${foundationList.empty}" class="card-dim rounded border border-2 border-light border-opacity-25 d-flex align-items-center justify-content-center text-light opacity-50">
                         <span class="fs-4 fw-bold" th:text="'F' + ${stat.count}"></span>
                     </div>
 
-                    <!-- Populated Foundation (Top Card acts as a Radio Button) -->
                     <div th:if="${!foundationList.empty}" th:with="topCard=${foundationList[foundationList.size() - 1]}">
                         <input type="radio" name="source" th:value="'F' + ${stat.count}" th:id="'F' + ${stat.count} + '-top'" class="hidden-radio">
                         <label th:for="'F' + ${stat.count} + '-top'" style="cursor: pointer;">
@@ -111,46 +108,36 @@
                     </div>
                 </div>
 
-                <!-- Destination Button for this Foundation -->
                 <button type="submit" name="destination" th:value="'F' + ${stat.count}" class="btn btn-sm btn-outline-light drop-btn">Drop F<span th:text="${stat.count}"></span></button>
             </div>
         </div>
 
-        <!-- BOTTOM ROW: 7 Columns -->
         <div class="d-flex justify-content-center gap-3 pb-5">
             <div th:each="columnList, stat : ${ {gameBoard.c1, gameBoard.c2, gameBoard.c3, gameBoard.c4, gameBoard.c5, gameBoard.c6, gameBoard.c7} }" class="d-flex flex-column align-items-center">
 
                 <div class="position-relative" style="width: 100px; min-height: 140px;">
-                    <!-- Empty Column -->
+
                     <div th:if="${columnList.empty}" class="card-dim rounded border border-2 border-light border-opacity-25 d-flex align-items-center justify-content-center text-light opacity-50">
                         <span class="fs-4 fw-bold" th:text="'C' + ${stat.count}"></span>
                     </div>
 
-                    <!-- Overlapping Cards -->
                     <div th:each="card, cardStat : ${columnList}" class="position-absolute" th:style="'top: ' + (${cardStat.index} * 30) + 'px; z-index: ' + ${cardStat.index}">
 
-                        <!-- If card is Face Down, just show the div -->
                         <div th:if="${!card.visible}" class="card-dim rounded shadow d-flex align-items-center justify-content-center border bg-primary border-white face-down-pattern"></div>
 
-                        <!-- If card is Face Up, wrap it in a Radio Button -->
                         <div th:if="${card.visible}">
                             <input type="radio" name="source" th:value="'C' + ${stat.count} + ':' + ${card.rank} + ${card.suit}" th:id="'C' + ${stat.count} + '-' + ${cardStat.index}" class="hidden-radio">
                             <label th:for="'C' + ${stat.count} + '-' + ${cardStat.index}" style="cursor: pointer; margin: 0;">
-
-                                <!-- We removed the center alignment and added 'p-2' (padding) and 'text-start' -->
                                 <div class="card-dim rounded shadow border bg-white p-2 text-start" th:classappend="${card.suit == 'H' or card.suit == 'D'} ? 'text-danger' : 'text-dark'">
-                                    <!-- Added 'd-block lh-1' to keep the text tight to the top -->
                                     <span class="fs-4 fw-bold d-block lh-1" th:text="${card.rank} + ${card.suit}"></span>
                                 </div>
-
                             </label>
                         </div>
-
                     </div>
                 </div>
 
-                <!-- Destination Button for this Column (Pushed down dynamically based on amount of cards) -->
-                <button type="submit" name="destination" th:value="'C' + ${stat.count}" class="btn btn-sm btn-outline-light drop-btn" th:style="'margin-top: ' + (${columnList.size() > 0 ? (columnList.size() * 30 + 110) : 10}) + 'px;'">Drop C<span th:text="${stat.count}"></span></button>
+                <button th:if="${gameBoard.phase != '0'}" type="submit" name="destination" th:value="'C' + ${stat.count}" class="btn btn-sm btn-outline-light drop-btn" th:style="'margin-top: ' + (${columnList.size() > 0 ? (columnList.size() * 30 + 110) : 10}) + 'px;'">Drop C<span th:text="${stat.count}"></span></button>
+
             </div>
         </div>
     </form>

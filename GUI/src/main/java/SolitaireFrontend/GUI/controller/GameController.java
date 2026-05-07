@@ -39,6 +39,7 @@ public class GameController {
     public String executeCommand(@RequestParam("command") String command, Model model) {
         // Send the user's move to the C backend
         String rawResponse = tcpClientService.sendCommand(command);
+        System.out.println(rawResponse);
 
         // Parse the new resulting state
         GameBoard board = parseToDto(rawResponse);
@@ -81,7 +82,6 @@ public class GameController {
         }
 
         try {
-            // We use "\\|" because pipe is a special regex character in Java
             String[] parts = rawResponse.split("\\|");
 
             // Status
@@ -139,6 +139,25 @@ public class GameController {
 
     private void assignColumnToBoard(GameBoard board, String key, List<Card> cards) {
         switch (key) {
+            case "Deck":
+                board.setDeck(cards); // Keep a copy in the deck just in case
+
+                // Deal the 52 cards into the 7 columns left-to-right
+                for (int i = 0; i < cards.size(); i++) {
+                    Card c = cards.get(i);
+                    c.setVisible(true);
+                    int colIndex = i % 7;
+                    switch (colIndex) {
+                        case 0: board.getC1().add(c); break;
+                        case 1: board.getC2().add(c); break;
+                        case 2: board.getC3().add(c); break;
+                        case 3: board.getC4().add(c); break;
+                        case 4: board.getC5().add(c); break;
+                        case 5: board.getC6().add(c); break;
+                        case 6: board.getC7().add(c); break;
+                    }
+                }
+                break;
             case "C1": board.setC1(cards); break;
             case "C2": board.setC2(cards); break;
             case "C3": board.setC3(cards); break;
