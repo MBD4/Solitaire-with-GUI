@@ -10,6 +10,8 @@ run the program on Windows: ```mvnw.cmd spring-boot:run```
 
 if you want to just run the compiled executable: java -jar GUI-0.0.1-SNAPSHOT.jar
 
+then go to http://localhost:8080/ on your webbrowser
+
 
 We chose to build our frontend GUI with JAVA and Spring Boot, as we have prior experience using it from the course 02324 Advanced Programming. 
 The TCP socket communication is implemented in the TcpClientService, which is called by the GameController. 
