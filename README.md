@@ -1,7 +1,7 @@
 To run the program:
-go to the GUI directory: cd GUI
-run the program on mac/linux: ./mvnw spring-boot:run
-run the program on Windows: mvnw.cmd spring-boot:run
+go to the GUI directory: ```cd GUI```
+run the program on mac/linux: ```./mvnw spring-boot:run```
+run the program on Windows: ```mvnw.cmd spring-boot:run```
 
 We chose to build our frontend GUI with JAVA and Spring Boot, as we have prior experience using it from the course 02324 Advanced Programming. 
 The TCP socket communication is implemented in the TcpClientService, which is called by the GameController. 
