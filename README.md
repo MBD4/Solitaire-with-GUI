@@ -1,5 +1,7 @@
 To run the program:  
 
+first run the c backend in server mode then:  
+
 go to the GUI directory: ```cd GUI```  
 
 run the program on mac/linux: ```./mvnw spring-boot:run```  
