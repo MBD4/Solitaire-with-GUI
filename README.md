@@ -8,7 +8,7 @@ run the program on mac/linux: ```./mvnw spring-boot:run```
 
 run the program on Windows: ```mvnw.cmd spring-boot:run```  
 
-to run executable: java -jar GUI-0.0.1-SNAPSHOT.jar
+if you want to just run the compiled executable: java -jar GUI-0.0.1-SNAPSHOT.jar
 
 
 We chose to build our frontend GUI with JAVA and Spring Boot, as we have prior experience using it from the course 02324 Advanced Programming. 
