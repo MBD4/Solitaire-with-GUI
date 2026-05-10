@@ -1,4 +1,9 @@
-We chose to build our frontend GUI with Spring Boot, as we have prior experience using it from the course 02324 Advanced Programming. 
+To run the program:
+go to the GUI directory: cd GUI
+run the program on mac/linux: ./mvnw spring-boot:run
+run the program on Windows: mvnw.cmd spring-boot:run
+
+We chose to build our frontend GUI with JAVA and Spring Boot, as we have prior experience using it from the course 02324 Advanced Programming. 
 The TCP socket communication is implemented in the TcpClientService, which is called by the GameController. 
 The controller receives the response from the C backend, parses it, and passes it on to our HTML page. 
 We use Thymeleaf to dynamically render the game board based on this data. We also use Bootstrap with our HTML page, to make it
