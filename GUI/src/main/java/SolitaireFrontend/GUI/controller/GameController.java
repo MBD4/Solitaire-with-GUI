@@ -39,7 +39,6 @@ public class GameController {
     public String executeCommand(@RequestParam("command") String command, Model model) {
         // Send the user's move to the C backend
         String rawResponse = tcpClientService.sendCommand(command);
-        System.out.println(rawResponse);
 
         // Parse the new resulting state
         GameBoard board = parseToDto(rawResponse);
